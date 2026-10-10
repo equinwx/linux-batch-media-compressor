@@ -1,4 +1,4 @@
-🗜️ Linux Batch Media Compressor
+#🗜️ Linux Batch Media Compressor
 
 A powerful, visually elegant, and completely offline batch media compressor for Linux. Designed to intelligently reduce the file size of your videos, images, audio files, documents, and ROMs while perfectly preserving your original folder structures.
 
