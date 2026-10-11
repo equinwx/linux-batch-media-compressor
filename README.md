@@ -65,12 +65,19 @@ sudo dnf install python3 python3-pyside6 python3-pillow python3-docx ffmpeg ghos
 
 ```
 
+**openSUSE**
+
+```bash
+sudo zypper install python3 python3-pyside6 python3-Pillow python3-docx ffmpeg ghostscript p7zip zstd lz4 pigz djvulibre mame-tools
+
+```
+
 ### Download & Run
 
 Once the official dependencies are installed, simply clone the repository and launch the app:
 
 ```bash
-git clone [https://github.com/yourusername/linux-batch-media-compressor.git](https://github.com/equinwx/linux-batch-media-compressor.git)
+git clone https://github.com/equinwx/linux-batch-media-compressor.git
 cd linux-batch-media-compressor
 python3 linux-batch-media-compressor.py
 
