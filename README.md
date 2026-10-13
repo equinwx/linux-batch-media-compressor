@@ -13,7 +13,7 @@ There is zero telemetry, no internet connection required, and your original file
 * **📂 Folder Structure Preservation:** Drag and drop massive, deeply nested directories. The engine maps and perfectly reconstructs your exact folder tree in the output destination.
 * **🛡️ Non-Destructive by Design:** Operates in strict read-only mode for source files. If a compressed output ends up larger than the original file, the engine automatically discards it and safely copies the original.
 * **📦 Universal Archiving:** Optionally package your finished, compressed batch directly into a secure, encrypted `ZIP`, `7Z`, or `TAR` (Zstandard, LZ4, Pigz) archive.
-* **🧠 Crash-Proof Fallbacks:** Unknown or uncompressible file types are automatically routed to a fast byte-for-byte stream copier.
+* **🧠 Crash-Proof Fall-backs:** Unknown or uncompressible file types are automatically routed to a fast byte-for-byte stream copier.
 * **🎨 Fluid Multi-DPI Interface:** Features a gorgeous Dark/Light mode toggle, dynamic accent colors (Blue, Purple, Amber, Emerald), and an elastic layout that never overlaps or breaks regardless of your monitor size.
 
 ---
@@ -41,13 +41,14 @@ There is zero telemetry, no internet connection required, and your original file
 
 ## ⚙️ Installation & Dependencies
 
-Install Python, the PySide6 UI framework, and the required background media binaries directly via your system's package manager.
+Modern Linux distributions safely manage Python libraries through their official repositories. Open your terminal and install Python, the PySide6 UI framework, and the required background media binaries directly via your system's package manager.
 
 **Ubuntu / Linux Mint / Debian**
+*(Note: Debian uniquely splits PySide6 into submodules. Ensure `qtcore`, `qtgui`, and `qtwidgets` are specified).*
 
 ```bash
 sudo apt update
-sudo apt install python3 python3-pyside6 python3-pil python3-docx ffmpeg ghostscript p7zip-full zstd liblz4-tool pigz djvulibre-bin mame-tools
+sudo apt install python3 python3-pyside6.qtcore python3-pyside6.qtgui python3-pyside6.qtwidgets python3-pil python3-docx ffmpeg ghostscript p7zip-full zstd lz4 pigz djvulibre-bin mame-tools
 
 ```
 
@@ -59,13 +60,14 @@ sudo pacman -S python pyside6 python-pillow python-docx ffmpeg ghostscript p7zip
 ```
 
 **Fedora**
+*(Note: To unlock proprietary codecs like H.265/NVENC, you may need to install the full `ffmpeg` package from the RPM Fusion repositories rather than `ffmpeg-free`).*
 
 ```bash
 sudo dnf install python3 python3-pyside6 python3-pillow python3-docx ffmpeg ghostscript p7zip p7zip-plugins zstd lz4 pigz djvulibre mame-tools
 
 ```
 
-**openSUSE**
+**openSUSE (Tumbleweed / Leap)**
 
 ```bash
 sudo zypper install python3 python3-pyside6 python3-Pillow python3-docx ffmpeg ghostscript p7zip zstd lz4 pigz djvulibre mame-tools
@@ -77,7 +79,7 @@ sudo zypper install python3 python3-pyside6 python3-Pillow python3-docx ffmpeg g
 Once the official dependencies are installed, simply clone the repository and launch the app:
 
 ```bash
-git clone https://github.com/equinwx/linux-batch-media-compressor.git
+git clone https://github.com/eqionwx/linux-batch-media-compressor.git
 cd linux-batch-media-compressor
 python3 linux-batch-media-compressor.py
 
@@ -94,8 +96,8 @@ We designed the interface to be fully navigable without a mouse for power users.
 | **Add Media** | `Ctrl + O` | Opens the file/folder selection dialog. |
 | **Clear Queue** | `Ctrl + Del` | Instantly wipes the entire file list. |
 | **Remove Item** | `Del` | Removes specifically highlighted files from the queue. |
-| **Paste Files** | `Ctrl + V` | Paste copied file/folder paths directly into the queue. |
 | **Copy Paths** | `Ctrl + C` | Copies the file paths of highlighted items to your clipboard. |
+| **Paste Files** | `Ctrl + V` | Paste copied file/folder paths directly into the queue. |
 | **Change Output** | `Ctrl + Shift + D` | Opens the directory picker to change the output location. |
 | **Open Folder** | `Ctrl + D` | Opens the current output folder in your native file manager. |
 | **START** | `Ctrl + Return` | Begins the batch compression process. |
