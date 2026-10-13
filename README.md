@@ -1,20 +1,20 @@
 # 🗜️ Linux Batch Media Compressor
 
-A powerful, visually elegant, and completely offline batch media compressor for Linux. Designed to intelligently reduce the file size of your videos, images, audio files, documents, and ROMs while perfectly preserving your original folder structures.
+A powerful, visually elegant, and completely offline batch media compressor for Linux. Designed to intelligently reduce the file size of videos, images, audio files, documents, and ROMs while perfectly preserving the original folder structures.
 
 Built with **PySide6**, it features a fully elastic, high-contrast user interface that natively scales from 720p laptop screens up to 4K desktop monitors.
 
-There is zero telemetry, no internet connection required, and your original files are air-gapped and never overwritten.
+There is zero telemetry, no internet connection required, and the original source files/folders are strictly read-only and never modified, deleted or overwritten.
 
 ## ✨ Key Features
 
-* **🤖 Smart Auto-Compression Engine:** Intelligently maps formats to their optimal codecs (e.g., routing MKV to H.265, PNG to WEBP, PDF to 150dpi) while retaining the original file extensions.
-* **⚡ Hardware Acceleration:** Native integration with NVIDIA (NVENC), Intel (QuickSync), and AMD (VAAPI) hardware encoders for blistering-fast video processing.
-* **📂 Folder Structure Preservation:** Drag and drop massive, deeply nested directories. The engine maps and perfectly reconstructs your exact folder tree in the output destination.
-* **🛡️ Non-Destructive by Design:** Operates in strict read-only mode for source files. If a compressed output ends up larger than the original file, the engine automatically discards it and safely copies the original.
-* **📦 Universal Archiving:** Optionally package your finished, compressed batch directly into a secure, encrypted `ZIP`, `7Z`, or `TAR` (Zstandard, LZ4, Pigz) archive.
-* **🧠 Crash-Proof Fall-backs:** Unknown or uncompressible file types are automatically routed to a fast byte-for-byte stream copier.
-* **🎨 Fluid Multi-DPI Interface:** Features a gorgeous Dark/Light mode toggle, dynamic accent colors (Blue, Purple, Amber, Emerald), and an elastic layout that never overlaps or breaks regardless of your monitor size.
+* **🤖 Smart Auto-Compression Engine:** Intelligently maps formats to their optimal reduced size (e.g., routing MKV/MP4 to CRF-23, Images to 85%, PDF to 150dpi) while retaining the original file extensions (Customizable if needed).
+* **⚡ Hardware Acceleration:** Integrates with NVIDIA (NVENC), Intel (QuickSync), and AMD (VAAPI) hardware encoders for blistering-fast video processing. CPU only compression is also supported.
+* **📂 Folder Structure Preservation:** Drag and drop massive, deeply nested directories. The engine maps and perfectly reconstructs the exact folder tree in the output destination.
+* **🛡️ Non-Destructive by Design:** Operates in strict read-only mode for source files, lacks the ability to modify or delete the source files/folders. If a compressed output ends up larger than the original file, the engine automatically discards it and safely copies the original in the output folders, never skips over a file.
+* **📦 Universal Archiving:** Optionally its ready to package the finished, compressed batch directly into a secure, encrypted `ZIP`, `7Z`, or Tarball `TAR` (Zstandard, LZ4, Pigz) archive if needed.
+* **🧠 Crash-Proof Fall-backs:** Unknown or non-compressible file types are automatically copied byte-for-byte in the output folder maintaining folder integrity.
+* **🎨 Fluid Multi-DPI Interface:** Features a Dark/Light theme, dynamic accent colors (Blue, Purple, Amber, Emerald), and an elastic layout that can adapt to most monitor sizes.
 
 ---
 
@@ -33,9 +33,9 @@ There is zero telemetry, no internet connection required, and your original file
 ## 📖 How to Use
 
 1. **Add Media:** Drag and drop individual files, or massive folders containing thousands of nested files, directly into the **File Queue**.
-2. **Choose Output:** The program defaults to a `Compressed_Output` folder in your current directory. Click **Change** to permanently save a custom default destination.
-3. **Configure (Optional):** The **Smart Engine** is on by default and will safely handle everything. If you need specific bitrates, resolutions, or codecs, click **Manual Compression Settings**.
-4. **Start Processing:** Hit **START**. You can pause the engine at any time, and view real-time FFmpeg diagnostics directly in the built-in terminal window.
+2. **Choose Output:** The program defaults to a `Compressed_Output` folder in the current directory the program is installed. Click **Change** to set a custom default destination folder.
+3. **Configure (Optional):** The **Smart Engine** is on by default and will safely handle everything. If someone needs specific bitrates, resolutions, codecs, different file extensions, or only need to compress one or selected type of files, its easily customizable inside **Manual Compression Settings**.
+4. **Start Processing:** Hit **START**. You can pause the engine at any time at your convenience, and view real-time process details directly in the built-in terminal window.
 
 ---
 
@@ -44,7 +44,7 @@ There is zero telemetry, no internet connection required, and your original file
 Modern Linux distributions safely manage Python libraries through their official repositories. Open your terminal and install Python, the PySide6 UI framework, and the required background media binaries directly via your system's package manager.
 
 **Ubuntu / Linux Mint / Debian**
-*(Note: Debian uniquely splits PySide6 into submodules. Ensure `qtcore`, `qtgui`, and `qtwidgets` are specified).*
+*(Note: Debian uniquely splits PySide6 into submodules).*
 
 ```bash
 sudo apt update
@@ -60,7 +60,7 @@ sudo pacman -S python pyside6 python-pillow python-docx ffmpeg ghostscript p7zip
 ```
 
 **Fedora**
-*(Note: To unlock proprietary codecs like H.265/NVENC, you may need to install the full `ffmpeg` package from the RPM Fusion repositories rather than `ffmpeg-free`).*
+*(Note: To unlock proprietary codecs like H.265/NVENC, you may need to install the full `ffmpeg` package from the RPM Fusion repositories rather than `ffmpeg-free`. Enable RPMfusion nonfree codecs if needed).*
 
 ```bash
 sudo dnf install python3 python3-pyside6 python3-pillow python3-docx ffmpeg ghostscript p7zip p7zip-plugins zstd lz4 pigz djvulibre mame-tools
@@ -79,7 +79,7 @@ sudo zypper install python3 python3-pyside6 python3-Pillow python3-docx ffmpeg g
 Once the official dependencies are installed, simply clone the repository and launch the app:
 
 ```bash
-git clone https://github.com/eqionwx/linux-batch-media-compressor.git
+git clone https://github.com/equinwx/linux-batch-media-compressor.git
 cd linux-batch-media-compressor
 python3 linux-batch-media-compressor.py
 
@@ -89,12 +89,12 @@ python3 linux-batch-media-compressor.py
 
 ## ⌨️ Keyboard Shortcuts
 
-We designed the interface to be fully navigable without a mouse for power users.
+The program interface is fully navigable without a mouse for advanced users.
 
 | Action | Shortcut | Description |
 | --- | --- | --- |
 | **Add Media** | `Ctrl + O` | Opens the file/folder selection dialog. |
-| **Clear Queue** | `Ctrl + Del` | Instantly wipes the entire file list. |
+| **Clear Queue** | `Ctrl + Del` | Instantly wipes the entire file/folder list. |
 | **Remove Item** | `Del` | Removes specifically highlighted files from the queue. |
 | **Copy Paths** | `Ctrl + C` | Copies the file paths of highlighted items to your clipboard. |
 | **Paste Files** | `Ctrl + V` | Paste copied file/folder paths directly into the queue. |
